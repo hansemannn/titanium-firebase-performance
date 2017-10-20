@@ -8,7 +8,6 @@
 #import "FirebasePerformanceModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
-#import "TiUtils.h"
 
 #import <FirebasePerformance/FirebasePerformance.h>
 
@@ -30,21 +29,21 @@
 
 - (void)startup
 {
-	[super startup];
-	NSLog(@"[DEBUG] %@ loaded",self);
+  [super startup];
+  NSLog(@"[DEBUG] %@ loaded", self);
 }
 
 - (NSMutableDictionary<NSString *, FIRTrace *> *)traces
-  {
-    if (_traces == nil) {
-      _traces = [[NSMutableDictionary alloc] init];
-    }
-    
-    return _traces;
+{
+  if (_traces == nil) {
+    _traces = [[NSMutableDictionary alloc] init];
   }
-  
+
+  return _traces;
+}
+
 #pragma Public APIs
-  
+
 - (void)startTrace:(id)name
 {
   ENSURE_SINGLE_ARG(name, NSString);
@@ -56,12 +55,12 @@
 {
   NSString *traceName = [arguments objectAtIndex:0];
   NSString *counterName = [arguments objectAtIndex:1];
-  
+
   if ([[self traces] objectForKey:traceName] == nil) {
     NSLog(@"[ERROR] Trying to increment the trace %@ which does not exist!", traceName);
     return;
   }
-  
+
   FIRTrace *trace = [[self traces] objectForKey:traceName];
 
   if ([arguments count] == 3) {
@@ -69,21 +68,39 @@
     [trace incrementCounterNamed:counterName by:count.integerValue];
     return;
   }
-  
+
   [trace incrementCounterNamed:counterName];
 }
 
 - (void)stopTrace:(id)name
 {
   ENSURE_SINGLE_ARG(name, NSString);
-  
+
   if ([[self traces] objectForKey:name] == nil) {
-    NSLog(@"[ERROR] Trying to increment the trace %@ which does not exist!", name);
+    [self throwException:[[NSString alloc] initWithFormat:@"Trying to increment the trace \"%@\" which does not exist.", name]
+               subreason:@"Start a new trace with \"startTrace('trace_name')\" before"
+                location:CODELOCATION];
     return;
   }
-  
+
   FIRTrace *trace = [[self traces] objectForKey:name];
   [trace stop];
+}
+
+- (NSArray<NSString *> *)allTraces
+{
+  return [[self traces] allKeys];
+}
+
+- (void)setDataCollectionEnabled:(NSNumber *)dataCollectionEnabled
+{
+  ENSURE_TYPE(dataCollectionEnabled, NSNumber);
+  [[FIRPerformance sharedInstance] setDataCollectionEnabled:[dataCollectionEnabled boolValue]];
+}
+
+- (NSNumber *)dataCollectionEnabled
+{
+  return @([[FIRPerformance sharedInstance] isDataCollectionEnabled]);
 }
 
 @end

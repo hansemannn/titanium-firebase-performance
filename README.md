@@ -10,7 +10,7 @@ Use the native Firebase SDK in Axway Titanium. This repository is part of the [T
 
 #### Methods
 
-##### `start(name)`
+##### `startTrace(name)`
   - `name` (String)
 
 ##### `incrementCounter(message, counter, increment)`
@@ -18,22 +18,34 @@ Use the native Firebase SDK in Axway Titanium. This repository is part of the [T
   - `counter` (String)
   - `increment` (Number, optional)
 
-##### `stop(name)`
+##### `stopTrace(name)`
   - `name` (String)
   
+#### Properties
+
+##### `dataCollectionEnabled` (Boolean, get/set)
+
+#### `allTraces` ([String])
+
 ## Example
 ```js
 // Require the Firebase Performance module
 var FirebasePerformance = require('firebase.performance');
 
 // Start the named trace
-FirebasePerformance.start('trace_name');
+FirebasePerformance.startTrace('trace_name');
 
 // Increment the counter value
 FirebasePerformance.incrementCounter('trace_name', 'counter_name', 1); // Trace name, counter name, increment (optional)
 
 // Stop the named trace
-FirebasePerformance.stop('trace_name');
+FirebasePerformance.stopTrace('trace_name');
+
+// Manually disable data collection (enabled by default)
+FirebasePerformance.dataCollectionEnabled = false;
+
+// Returns all trace-names
+Ti.API.log(FirebasePerformance.allTraces);
 ```
 
 ## Build
