@@ -3,16 +3,16 @@
 # during compilation, packaging, distribution, etc.
 #
 version: 1.0.0
-apiversion: 2
-architectures: armv7 arm64 i386 x86_64
+apiversion: 4
+architectures: arm64-v8a armeabi-v7a x86
 description: titanium-firebase-performance
 author: Hans Knoechel
 license: Apache 2
-copyright: Copyright (c) 2017 by Hans Knöchel
+copyright: Copyright (c) 2018-present by Hans Knöchel
 
 # these should not be edited
 name: titanium-firebase-performance
 moduleid: firebase.performance
-guid: 0f3ea40e-0a87-4ded-8402-44770ed6a41e
-platform: iphone
-minsdk: 6.2.0
+guid: 4e3c4e2d-afea-42e5-86f6-d2bdc0767130
+platform: android
+minsdk: 7.0.0

@@ -2,7 +2,8 @@
 Use the native Firebase SDK in Axway Titanium. This repository is part of the [Titanium Firebase](https://github.com/hansemannn/titanium-firebase) project.
 
 ## Requirements
-- [x] Titanium SDK 6.2.0 or later
+- [x] iOS: Titanium SDK 6.2.0+
+- [x] Android: Titanium SDK 7.0.0+
 
 ## Download
 - [x] [Stable release](https://github.com/hansemannn/titanium-firebase-performance/releases)
@@ -27,9 +28,9 @@ Use the native Firebase SDK in Axway Titanium. This repository is part of the [T
   
 #### Properties
 
-##### `dataCollectionEnabled` (Boolean, get/set)
+##### `dataCollectionEnabled` (Boolean, get/set, iOS-only)
 
-#### `allTraces` ([String])
+#### `allTraces` ([String], iOS-only)
 
 ## Example
 ```js
@@ -45,6 +46,8 @@ FirebasePerformance.incrementCounter('trace_name', 'counter_name', 1); // Trace 
 // Stop the named trace
 FirebasePerformance.stopTrace('trace_name');
 
+/// -- iOS-only, remove for Android for now --
+
 // Manually disable data collection (enabled by default)
 FirebasePerformance.dataCollectionEnabled = false;
 
@@ -53,12 +56,20 @@ Ti.API.log(FirebasePerformance.allTraces);
 ```
 
 ## Build
+
+### iOS
 ```js
 cd ios
 appc ti build -p ios --build-only
 ```
 
+### Android
+```js
+cd android
+appc ti build -p android --build-only
+```
+
 ## Legal
 
-This module is Copyright (c) 2017-Present by Appcelerator, Inc. All Rights Reserved. 
+This module is Copyright (c) 2017-present by Hans Knöchel. All Rights Reserved.
 Usage of this module is subject to the Terms of Service agreement with Appcelerator, Inc.  
