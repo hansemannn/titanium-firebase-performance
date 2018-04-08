@@ -31,3 +31,4 @@ nbproject
 /metadata.json
 /ios/metadata.json
 ios/firebase.performance-iphone-*.zip
+/ios/dist
