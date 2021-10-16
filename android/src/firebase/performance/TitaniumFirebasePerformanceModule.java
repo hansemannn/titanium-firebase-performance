@@ -70,12 +70,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
     }
 
     Trace trace = this.traces.get(identifier);
-
-    if (incrementedBy != null) {
-      trace.incrementCounter(counterName, (long) TiConvert.toInt(incrementedBy));
-      return;
-    }
     
-    trace.incrementCounter(counterName);
+    trace.incrementMetric(counterName, (long) TiConvert.toInt(incrementedBy));
   }
 }
