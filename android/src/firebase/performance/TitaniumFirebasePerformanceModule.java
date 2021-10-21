@@ -77,8 +77,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
 	
   @Kroll.method
   public void stopMetric(String url, String httpMethod) {
-	if (this.metrics.get(url + httpMethod) == null) {
-  	
+	if (this.metrics.get(url + httpMethod) == null) { 	
 		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
 		return;
 	}
@@ -89,8 +88,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
 	
   @Kroll.method
   public void setMetricRequestPayloadSize(String url, String httpMethod, long bytes) {
-	if (this.metrics.get(url + httpMethod) == null) {
-  	
+	if (this.metrics.get(url + httpMethod) == null) {	
 		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
 		return;
 	}
@@ -101,8 +99,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
 
   @Kroll.method
   public void setMetricHttpResponseCode(String url, String httpMethod, int responseCode) {
-	if (this.metrics.get(url + httpMethod) == null) {
-  	
+	if (this.metrics.get(url + httpMethod) == null) {	
 		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
 		return;
 	}
@@ -113,8 +110,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
 	
   @Kroll.method
   public void setMetricResponseContentType(String url, String httpMethod, String contentType) {
-	if (this.metrics.get(url + httpMethod) == null) {
-  	
+	if (this.metrics.get(url + httpMethod) == null) {	
 		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
 		return;
 	}
@@ -125,8 +121,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
 	
   @Kroll.method
   public void setMetricResponsePayloadSize(String url, String httpMethod, long bytes) {
-	if (this.metrics.get(url + httpMethod) == null) {
-  	
+	if (this.metrics.get(url + httpMethod) == null) {	
 		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
 		return;
 	}
@@ -137,8 +132,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
 	
   @Kroll.method
   public void setMetricAttribute(String url, String httpMethod, String attribute, String value) {
-	if (this.metrics.get(url + httpMethod) == null) {
-  	
+	if (this.metrics.get(url + httpMethod) == null) {	
 		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
 		return;
 	}
