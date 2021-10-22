@@ -69,76 +69,76 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
   
   @Kroll.method
   public void startMetric(String url, String httpMethod) {
-	HttpMetric metric = FirebasePerformance.getInstance().newHttpMetric(url, httpMethod);
-	metric.start();
+    HttpMetric metric = FirebasePerformance.getInstance().newHttpMetric(url, httpMethod);
+    metric.start();
 
-	this.metrics.put(url + httpMethod, metric);
+    this.metrics.put(url + httpMethod, metric);
   }
 	
   @Kroll.method
   public void stopMetric(String url, String httpMethod) {
-	if (this.metrics.get(url + httpMethod) == null) { 	
-		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
-		return;
-	}
+    if (this.metrics.get(url + httpMethod) == null) { 	
+	  Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
+	  return;
+    }
 
-	HttpMetric metric = this.metrics.get(url + httpMethod);
-	metric.stop();
+    HttpMetric metric = this.metrics.get(url + httpMethod);
+    metric.stop();
   }
 	
   @Kroll.method
   public void setMetricRequestPayloadSize(String url, String httpMethod, long bytes) {
-	if (this.metrics.get(url + httpMethod) == null) {	
-		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
-		return;
-	}
+    if (this.metrics.get(url + httpMethod) == null) {	
+	  Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
+	  return;
+    }
 
-	HttpMetric metric = this.metrics.get(url + httpMethod);
-	metric.setRequestPayloadSize(bytes);
+    HttpMetric metric = this.metrics.get(url + httpMethod);
+    metric.setRequestPayloadSize(bytes);
   }
 
   @Kroll.method
   public void setMetricHttpResponseCode(String url, String httpMethod, int responseCode) {
-	if (this.metrics.get(url + httpMethod) == null) {	
-		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
-		return;
+    if (this.metrics.get(url + httpMethod) == null) {	
+	  Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
+	  return;
 	}
 
-	HttpMetric metric = this.metrics.get(url + httpMethod);
-	metric.setHttpResponseCode(responseCode);
+    HttpMetric metric = this.metrics.get(url + httpMethod);
+    metric.setHttpResponseCode(responseCode);
   }
 	
   @Kroll.method
   public void setMetricResponseContentType(String url, String httpMethod, String contentType) {
-	if (this.metrics.get(url + httpMethod) == null) {	
-		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
-		return;
-	}
+    if (this.metrics.get(url + httpMethod) == null) {	
+	  Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
+	  return;
+    }
 
-	HttpMetric metric = this.metrics.get(url + httpMethod);
-	metric.setResponseContentType(contentType);
+    HttpMetric metric = this.metrics.get(url + httpMethod);
+    metric.setResponseContentType(contentType);
   }
 	
   @Kroll.method
   public void setMetricResponsePayloadSize(String url, String httpMethod, long bytes) {
-	if (this.metrics.get(url + httpMethod) == null) {	
-		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
-		return;
-	}
+    if (this.metrics.get(url + httpMethod) == null) {	
+	  Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
+	  return;
+    }
 
-	HttpMetric metric = this.metrics.get(url + httpMethod);
-	metric.setResponsePayloadSize(bytes);
+    HttpMetric metric = this.metrics.get(url + httpMethod);
+    metric.setResponsePayloadSize(bytes);
   }
 	
   @Kroll.method
   public void setMetricAttribute(String url, String httpMethod, String attribute, String value) {
-	if (this.metrics.get(url + httpMethod) == null) {	
-		Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
-		return;
-	}
+    if (this.metrics.get(url + httpMethod) == null) {	
+	  Log.e(LCAT, String.format("Cannot find metric for url %s", url + httpMethod));
+	  return;
+    }
 
-	HttpMetric metric = this.metrics.get(url + httpMethod);
-	metric.putAttribute(attribute, value);
+    HttpMetric metric = this.metrics.get(url + httpMethod);
+    metric.putAttribute(attribute, value);
   }
 
   @Kroll.method
