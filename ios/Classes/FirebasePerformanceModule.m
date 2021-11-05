@@ -61,15 +61,15 @@
     return;
   }
 
-  FIRTrace *trace = [[self traces] objectForKey:traceName];
+  FIRTrace *trace = (FIRTrace*)[self.traces objectForKey:traceName];
 
   if ([arguments count] == 3) {
     NSNumber *count = [arguments objectAtIndex:2];
-    [trace incrementCounterNamed:counterName by:count.integerValue];
+      [trace incrementMetric:counterName byInt:1];
     return;
   }
 
-  [trace incrementCounterNamed:counterName];
+    [trace incrementMetric:counterName byInt:1];
 }
 
 - (void)stopTrace:(id)name
