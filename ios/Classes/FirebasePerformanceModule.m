@@ -8,6 +8,7 @@
 #import "FirebasePerformanceModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
+
 #import <FirebasePerformance/FirebasePerformance.h>
 
 @implementation FirebasePerformanceModule
@@ -53,7 +54,7 @@
 - (void)incrementCounter:(id)arguments
 {
   NSString *traceName = [arguments objectAtIndex:0];
-  NSString *metricName = [arguments objectAtIndex:1];
+  NSString *counterName = [arguments objectAtIndex:1];
 
   if ([[self traces] objectForKey:traceName] == nil) {
     NSLog(@"[ERROR] Trying to increment the trace %@ which does not exist!", traceName);
@@ -61,14 +62,14 @@
   }
 
   FIRTrace *trace = (FIRTrace*)[self.traces objectForKey:traceName];
-    
+
   if ([arguments count] == 3) {
-      NSNumber *incrementBy = [arguments objectAtIndex:2];
-      [trace incrementMetric:metricName byInt: incrementBy.integerValue];
-      return;
+    NSNumber *count = [arguments objectAtIndex:2];
+      [trace incrementMetric:counterName byInt:1];
+    return;
   }
-    
-  [trace incrementMetric:metricName byInt:1];
+
+    [trace incrementMetric:counterName byInt:1];
 }
 
 - (void)stopTrace:(id)name
