@@ -8,7 +8,7 @@ this project maintained and be able to use the latest Firebase SDK's, please see
 thank you!
 
 ## Requirements
-- [x] The [Firebase Core](https://github.com/hansemannn/titanium-firebase-core) module
+- [x] The [Firebase Core](https://github.com/hansemannn/titanium-firebase-core) module (iOS only)
 - [x] iOS: Titanium SDK 6.3.0+
 - [x] Android: Titanium SDK 7.0.0+
 
@@ -32,7 +32,7 @@ thank you!
 
 ##### `stopTrace(name)`
   - `name` (String)
-  
+
 #### Properties
 
 ##### `dataCollectionEnabled` (Boolean, get/set, iOS-only)
