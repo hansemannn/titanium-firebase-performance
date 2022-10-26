@@ -71,7 +71,9 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
   public void startMetric(String url, String httpMethod) {
     HttpMetric metric = FirebasePerformance.getInstance().newHttpMetric(url, httpMethod);
     metric.start();
-
+    if (this.metrics == null) {
+      metrics = new HashMap<String, HttpMetric>();
+    }
     this.metrics.put(url + httpMethod, metric);
   }
 	
