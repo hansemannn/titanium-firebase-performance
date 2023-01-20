@@ -77,7 +77,7 @@
   ENSURE_SINGLE_ARG(name, NSString);
 
   if ([[self traces] objectForKey:name] == nil) {
-    [self throwException:[[NSString alloc] initWithFormat:@"Trying to increment the trace \"%@\" which does not exist.", name]
+    [self throwException:[[NSString alloc] initWithFormat:@"Trying to stop the trace \"%@\" which does not exist.", name]
                subreason:@"Start a new trace with \"startTrace('trace_name')\" before"
                 location:CODELOCATION];
     return;
