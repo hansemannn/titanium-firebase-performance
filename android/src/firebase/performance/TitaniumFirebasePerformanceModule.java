@@ -43,17 +43,26 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
   {
     this.traces.clear();
     this.traces = null;
-    
+
     this.metrics.clear();
     this.metrics = null;
   }
 
   @Kroll.method
   public void startTrace(String identifier) {
-    Trace trace = FirebasePerformance.getInstance().newTrace(identifier);
-    trace.start();
+		if (identifier == null || identifier == "") {
+			Log.e(LCAT, String.format("Invalid identifier for the trace"));
+      return;
+		}
 
-    this.traces.put(identifier, trace);
+		if (this.traces == null) {
+			this.traces = new HashMap<String, Trace>();
+		}
+
+		Trace trace = FirebasePerformance.getInstance().newTrace(identifier);
+		trace.start();
+
+		this.traces.put(identifier, trace);
   }
 
   @Kroll.method
@@ -66,15 +75,24 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
     Trace trace = this.traces.get(identifier);
     trace.stop();
   }
-  
+
   @Kroll.method
   public void startMetric(String url, String httpMethod) {
-    HttpMetric metric = FirebasePerformance.getInstance().newHttpMetric(url, httpMethod);
-    metric.start();
+		if (url == null || httpMethod == null) {
+			Log.e(LCAT, String.format("Invalid parameters for the metric"));
+      return;
+		}
 
-    this.metrics.put(url + httpMethod, metric);
+		if (this.metrics == null) {
+			this.metrics = new HashMap<String, HttpMetric>();
+		}
+
+		HttpMetric metric = FirebasePerformance.getInstance().newHttpMetric(url, httpMethod);
+		metric.start();
+
+		this.metrics.put(url + httpMethod, metric);
   }
-	
+
   @Kroll.method
   public void stopMetric(String url, String httpMethod) {
     if (this.metrics == null || this.metrics.get(url + httpMethod) == null) {
@@ -85,7 +103,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
     HttpMetric metric = this.metrics.get(url + httpMethod);
     metric.stop();
   }
-	
+
   @Kroll.method
   public void setMetricRequestPayloadSize(String url, String httpMethod, long bytes) {
     if (this.metrics == null || this.metrics.get(url + httpMethod) == null) {
@@ -107,7 +125,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
     HttpMetric metric = this.metrics.get(url + httpMethod);
     metric.setHttpResponseCode(responseCode);
   }
-	
+
   @Kroll.method
   public void setMetricResponseContentType(String url, String httpMethod, String contentType) {
     if (this.metrics == null || this.metrics.get(url + httpMethod) == null) {
@@ -118,7 +136,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
     HttpMetric metric = this.metrics.get(url + httpMethod);
     metric.setResponseContentType(contentType);
   }
-	
+
   @Kroll.method
   public void setMetricResponsePayloadSize(String url, String httpMethod, long bytes) {
     if (this.metrics == null || this.metrics.get(url + httpMethod) == null) {
@@ -129,7 +147,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
     HttpMetric metric = this.metrics.get(url + httpMethod);
     metric.setResponsePayloadSize(bytes);
   }
-	
+
   @Kroll.method
   public void setMetricAttribute(String url, String httpMethod, String attribute, String value) {
     if (this.metrics == null || this.metrics.get(url + httpMethod) == null) {
@@ -149,7 +167,7 @@ public class TitaniumFirebasePerformanceModule extends KrollModule
     }
 
     Trace trace = this.traces.get(identifier);
-    
+
     trace.incrementMetric(counterName, (long) TiConvert.toInt(incrementedBy));
   }
 }
