@@ -1,5 +1,5 @@
 framework module FirebasePerformance {
-umbrella header "FirebasePerformance.h"
+umbrella header "FirebasePerformance-umbrella.h"
 export *
 module * { export * }
   link framework "Foundation"
